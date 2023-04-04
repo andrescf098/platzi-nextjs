@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import OrderItem from '@components/OrderItem';
 import AppContext from '@context/AppContext';
 import styles from '@styles/MyOrder.module.scss';
@@ -17,8 +19,8 @@ const MyOrder = () => {
     <aside className={styles.MyOrder}>
       <div className={styles['MyOrder-container']}>
         <div className={styles['title-container']}>
-          <img className={`${styles['more-clickable-area']} ${styles['pointer']}`} src={arrow} alt="arrow" onClick={() => toggleOrder()} />
-          <p className="title">My order</p>
+          <Image className={(styles['more-clickable-area'], styles.pointer)} src={arrow} alt="arrow" onClick={() => toggleOrder()} />
+          <p className={styles.title}>My order</p>
         </div>
         <div className={styles['my-order-content']}>
           <div className={styles['my-orders']}>
@@ -26,13 +28,15 @@ const MyOrder = () => {
               <OrderItem product={product} key={`orderItem-${product.id}`} />
             ))}
           </div>
-          <div className={styles['order']}>
+          <div className={styles.order}>
             <p>
               <span>Total</span>
             </p>
             <p>${sumTotal()}</p>
           </div>
-          <button className={styles['primary-button']}>Checkout</button>
+          <Link className={styles['primary-button']} href="/checkout">
+            Checkout
+          </Link>
         </div>
       </div>
     </aside>
